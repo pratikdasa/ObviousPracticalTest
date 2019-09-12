@@ -9,9 +9,12 @@ class ImageLoader {
         @JvmStatic
         @BindingAdapter("imageUrl")
         fun loadImage(view: ImageView, imageUrl: String) {
+
             Glide.with(view.getContext())
                 .load(imageUrl)
                 .into(view)
         }
+
+
     }
 }

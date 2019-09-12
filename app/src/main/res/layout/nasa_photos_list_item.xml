@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+>
+    <data>
+        <variable
+                name="gallery"
+                type="com.obviouspracticaltest.models.GalleryModel"/>
+        <variable name="pos"
+                  type="Integer"/>
+        <variable name="itemClickListener"
+                  type="com.obvioustest.listeners.CustomClickListener"/>
+         <variable name="view"
+                  type="android.view.View"/>
+    </data>
+
+     <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:onClick="@{() -> itemClickListener.cardClicked(gallery,pos,view)}"
+            android:orientation="vertical">
+
+        <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                app:imageUrl="@{gallery.url}"
+                tools:srcCompat="@tools:sample/avatars"
+        />
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_alignParentBottom="true"
+                      android:background="@color/colorBlackTransparent"
+                      android:orientation="vertical">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="@{gallery.date}"
+                    android:textColor="@color/colorWhite"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="@{gallery.explanation}"
+                    android:textColor="@color/colorWhite"
+                    android:visibility="gone"
+            />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
+

@@ -54,7 +54,4 @@ class NasaPhotosListViewModel(activity: Activity) : ViewModel(), WsResponse {
       }
 
 
-
-
-
 }
