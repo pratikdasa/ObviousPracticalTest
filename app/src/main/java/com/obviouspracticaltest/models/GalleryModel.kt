@@ -1,9 +1,13 @@
 package com.obviouspracticaltest.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "NasaPhotos")
 class GalleryModel {
+    @PrimaryKey
     @SerializedName("date")
     @Expose
      var date: String=""

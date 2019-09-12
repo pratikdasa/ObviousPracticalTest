@@ -24,9 +24,7 @@ class NasaPhotosListActivity : AppCompatActivity() {
         gridBinding = DataBindingUtil.setContentView(this, R.layout.activity_grid)
         gridAdapter = NasaPhotosListAdapter(this)
         gridBinding.rvGirid.adapter = gridAdapter
-
-        nasaPhotosListViewModel =
-            ViewModelProviders.of(this, ActivityViewModelFactory(this)).get(NasaPhotosListViewModel::class.java)
+        nasaPhotosListViewModel = ViewModelProviders.of(this, ActivityViewModelFactory(this)).get(NasaPhotosListViewModel::class.java)
         nasaPhotosListViewModel.apiCallForGettingGalleryImage()
         inflateGalleryItems()
     }

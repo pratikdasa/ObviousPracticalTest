@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.obviouspracticaltest.R
 import com.obviouspracticaltest.databinding.NasaPhotosListItemBinding
 import com.obviouspracticaltest.models.GalleryModel
 import com.obvioustest.listeners.CustomClickListener
+
+
 
 
 class NasaPhotosListAdapter(activity: Activity) : RecyclerView.Adapter<NasaPhotosListAdapter.GridHolder>(),
@@ -38,7 +39,7 @@ class NasaPhotosListAdapter(activity: Activity) : RecyclerView.Adapter<NasaPhoto
         itemGridBinding =
             DataBindingUtil.inflate(
                 inflater,
-                R.layout.nasa_photos_list_item,
+                com.obviouspracticaltest.R.layout.nasa_photos_list_item,
                 parent,
                 false
             ) as NasaPhotosListItemBinding
@@ -53,10 +54,15 @@ class NasaPhotosListAdapter(activity: Activity) : RecyclerView.Adapter<NasaPhoto
         val gallery = galleryList.get(position)
         itemGridBinding.gallery = gallery
         itemGridBinding.pos = position
-
         itemGridBinding.itemClickListener = this
     }
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
     class GridHolder(itemGridBinding: NasaPhotosListItemBinding) : RecyclerView.ViewHolder(itemGridBinding.root)
 
 }

@@ -1,11 +1,13 @@
 package com.obviouspracticaltest.viewmodel
 
 import android.app.Activity
+import android.os.AsyncTask
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.obviouspracticaltest.ObviousPracticalTest
 import com.obviouspracticaltest.models.GalleryModel
+import com.obvioustest.room.GalleryRoomDatabase
 import com.obvioustest.utils.StaticUtils
 import com.obvioustest.utils.WsParamUtils
 import retrofit.WsFactory
@@ -24,13 +26,19 @@ class NasaPhotosListViewModel(activity: Activity) : ViewModel(), WsResponse {
     init {
         this.activity = activity
         (activity.application as ObviousPracticalTest).getNetComponent().inject(this)
-    }
+      }
 
     override fun successResponse(response: Any?, code: Int) {
         when (code) {
             StaticUtils.REQUEST_FOR_GALLARY -> {
                 val galleryModelList: List<GalleryModel> = response as List<GalleryModel>
                 this.galleryModelList.value = galleryModelList
+                 Insert().execute(galleryModelList)
+
+//                for (i in 0..galleryModelList.size - 1) {
+//                    val galleryModel: GalleryModel = galleryModelList.get(i);
+//                    Insert().execute(galleryModel)
+//                }
             }
         }
     }
@@ -40,7 +48,7 @@ class NasaPhotosListViewModel(activity: Activity) : ViewModel(), WsResponse {
     }
 
     override fun noInternetConnection(code: Int) {
-        Toast.makeText(activity, "No Internet Connection", Toast.LENGTH_LONG).show()
+        SelectRecord().execute()
     }
 
     fun apiCallForGettingGalleryImage() {
@@ -51,7 +59,26 @@ class NasaPhotosListViewModel(activity: Activity) : ViewModel(), WsResponse {
         repestObj.put(WsParamUtils.END_DATE, StaticUtils.getCurrentDate())
         val galleryResponse = WsFactory.getImageGallary(retrofit, repestObj)
         WsUtils.getReponse(activity, true, galleryResponse as Call<Any>, StaticUtils.REQUEST_FOR_GALLARY, this)
-      }
+    }
 
+
+    inner class Insert : AsyncTask< List<GalleryModel>, Void, Void>() {
+        override fun doInBackground(vararg params: List<GalleryModel>): Void? {
+            GalleryRoomDatabase.getDatabase(activity).galleryDao().insert(params[0])
+            return null
+        }
+    }
+
+
+    inner class SelectRecord : AsyncTask<Void, Void, List<GalleryModel>>() {
+
+        override fun doInBackground(vararg p0: Void?): List<GalleryModel> {
+            return GalleryRoomDatabase.getDatabase(activity).galleryDao().getGalleryList()
+         }
+        override fun onPostExecute(result: List<GalleryModel>?) {
+            super.onPostExecute(result)
+            this@NasaPhotosListViewModel.galleryModelList.value = result
+        }
+    }
 
 }
