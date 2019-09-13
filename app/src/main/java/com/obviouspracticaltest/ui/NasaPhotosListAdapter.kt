@@ -27,7 +27,7 @@ class NasaPhotosListAdapter(activity: Activity) : RecyclerView.Adapter<NasaPhoto
     init {
         this.activity = activity
         galleryList = ArrayList<GalleryModel>() as List<GalleryModel>
-    }
+       }
 
     override fun cardClicked(gallery: GalleryModel, position: Int, imageView: ImageView, textView: TextView) {
         val intent = Intent(activity, PreviewActivity::class.java)

@@ -23,9 +23,7 @@
         </activity>
 
         <activity android:name="com.obvioustest.ui.PreviewActivity"
-                  android:configChanges="keyboardHidden|orientation|screenSize"
-                  android:screenOrientation="unspecified"
-        >
+                  android:screenOrientation="portrait">
         </activity>
     </application>
 

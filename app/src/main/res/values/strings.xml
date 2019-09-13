@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ObviousPracticalTest</string>
+    <string name="error_message">Something went wrong,please try again later</string>
+    <string name="dialog_title">ERROR!</string>
+    <string name="no_internet_connection">Please connect your device to the internet</string>
+    <string name="ok">OK</string>
+
 </resources>

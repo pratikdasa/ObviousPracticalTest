@@ -29,6 +29,9 @@ android {
     androidExtensions {
         experimental = true
     }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 kapt {
@@ -70,5 +73,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     kapt 'androidx.room:room-compiler:2.1.0'
     androidTestImplementation 'androidx.room:room-testing:2.1.0'
+    //For Testing
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'androidx.test:core:1.0.0'
 
 }

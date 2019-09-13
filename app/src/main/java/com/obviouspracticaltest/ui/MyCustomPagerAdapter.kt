@@ -1,12 +1,13 @@
 package com.obvioustest.ui
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
@@ -38,6 +39,7 @@ class MyCustomPagerAdapter(internal var context: Context, internal var galleryLi
         val circularProgressDrawable = CircularProgressDrawable(itemView.context)
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.setColorSchemeColors(Color.WHITE)
         circularProgressDrawable.start()
 
         Glide.with(context)
@@ -51,6 +53,6 @@ class MyCustomPagerAdapter(internal var context: Context, internal var galleryLi
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as RelativeLayout)
+        container.removeView(`object` as ConstraintLayout)
     }
 }

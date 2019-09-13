@@ -23,6 +23,10 @@ class ImageLoader {
                     .placeholder(R.mipmap.ic_launcher)
                     .placeholder(circularProgressDrawable)
                     .into(view)
+            }else{
+                Glide.with(view.getContext())
+                    .load(R.mipmap.ic_launcher)
+                    .into(view)
             }
 
         }

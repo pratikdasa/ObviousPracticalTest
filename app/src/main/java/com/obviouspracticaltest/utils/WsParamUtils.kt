@@ -6,4 +6,6 @@ object WsParamUtils {
     val START_DATE="start_date"
     val HD="hd"
     val END_DATE="end_date"
-  }
+    val DATE="date"
+
+}

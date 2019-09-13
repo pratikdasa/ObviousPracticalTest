@@ -17,6 +17,8 @@ class PreviewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar()?.setDisplayShowHomeEnabled(true);
         setContentView(R.layout.activity_preview)
         position = intent.getIntExtra("pos", -1)
         SelectRecord().execute()
