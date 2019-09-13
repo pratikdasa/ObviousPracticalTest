@@ -1,17 +1,20 @@
 package com.obviouspracticaltest.ui
 
 import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.obviouspracticaltest.databinding.NasaPhotosListItemBinding
 import com.obviouspracticaltest.models.GalleryModel
 import com.obvioustest.listeners.CustomClickListener
-
-
-
+import com.obvioustest.ui.PreviewActivity
 
 class NasaPhotosListAdapter(activity: Activity) : RecyclerView.Adapter<NasaPhotosListAdapter.GridHolder>(),
     CustomClickListener {
@@ -26,7 +29,18 @@ class NasaPhotosListAdapter(activity: Activity) : RecyclerView.Adapter<NasaPhoto
         galleryList = ArrayList<GalleryModel>() as List<GalleryModel>
     }
 
-    override fun cardClicked(gallery: GalleryModel, position: Int, view: View) {
+    override fun cardClicked(gallery: GalleryModel, position: Int, imageView: ImageView, textView: TextView) {
+        val intent = Intent(activity, PreviewActivity::class.java)
+        intent.putExtra("pos", position)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+
+            val p1 = Pair.create<View, String>(imageView, "imageView"+position)
+            val p2 = Pair.create<View, String>(textView, "textView"+position)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, p1, p2)
+            activity.startActivity(intent, options.toBundle())
+        } else {
+            activity.startActivity(intent)
+        }
     }
 
     fun setAdapter(galleryList: List<GalleryModel>) {
@@ -54,6 +68,8 @@ class NasaPhotosListAdapter(activity: Activity) : RecyclerView.Adapter<NasaPhoto
         val gallery = galleryList.get(position)
         itemGridBinding.gallery = gallery
         itemGridBinding.pos = position
+        itemGridBinding.imageVar = holder.imageView
+        itemGridBinding.textVar = holder.txtTitle
         itemGridBinding.itemClickListener = this
     }
     override fun getItemId(position: Int): Long {
@@ -63,6 +79,11 @@ class NasaPhotosListAdapter(activity: Activity) : RecyclerView.Adapter<NasaPhoto
     override fun getItemViewType(position: Int): Int {
         return position
     }
-    class GridHolder(itemGridBinding: NasaPhotosListItemBinding) : RecyclerView.ViewHolder(itemGridBinding.root)
+    class GridHolder(itemGridBinding: NasaPhotosListItemBinding) : RecyclerView.ViewHolder(itemGridBinding.root) {
+        var imageView = itemGridBinding.imageView
+        var txtTitle = itemGridBinding.txtTitle
+
+    }
+
 
 }

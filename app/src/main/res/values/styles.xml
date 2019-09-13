@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -6,6 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowContentTransitions" tools:ignore="NewApi">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- specify window enter and exit transitions -->
+        <item name="android:windowEnterTransition" tools:ignore="NewApi">@transition/custom_window_transition</item>
+        <item name="android:windowExitTransition" tools:ignore="NewApi">@transition/custom_window_transition</item>
+        <!-- specify shared element enter and exit transitions -->
+        <item name="android:windowSharedElementEnterTransition" tools:ignore="NewApi">@transition/custom_shared_element_transition</item>
+        <item name="android:windowSharedElementExitTransition" tools:ignore="NewApi">@transition/custom_shared_element_transition</item>
     </style>
 
 </resources>

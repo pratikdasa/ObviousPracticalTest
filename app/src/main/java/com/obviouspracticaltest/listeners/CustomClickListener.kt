@@ -1,8 +1,9 @@
 package com.obvioustest.listeners
 
-import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import com.obviouspracticaltest.models.GalleryModel
 
 interface CustomClickListener {
-    fun cardClicked(gallery: GalleryModel,pos:Int,view:View)
+    fun cardClicked(gallery: GalleryModel, pos:Int, imageView: ImageView, textView: TextView)
 }
