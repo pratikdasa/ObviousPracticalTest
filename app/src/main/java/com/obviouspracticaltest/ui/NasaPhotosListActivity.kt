@@ -25,17 +25,8 @@ class NasaPhotosListActivity : AppCompatActivity() {
         gridBinding = DataBindingUtil.setContentView(this, R.layout.activity_nasa_photo_list)
         gridAdapter = NasaPhotosListAdapter(this)
         gridBinding.rvGirid.adapter = gridAdapter
-        nasaPhotosListViewModel =
-            ViewModelProviders.of(this, ActivityViewModelFactory(this)).get(NasaPhotosListViewModel::class.java)
-        if (StaticUtils.isNetworkConnected(this))
-            nasaPhotosListViewModel.apiCallForGettingGalleryImage()
-        else
-            StaticUtils.getAlertMessage(
-                this,
-                getString(R.string.no_internet_connection),
-                getString(R.string.dialog_title)
-            )
-
+        nasaPhotosListViewModel = ViewModelProviders.of(this, ActivityViewModelFactory(this)).get(NasaPhotosListViewModel::class.java)
+        nasaPhotosListViewModel.apiCallForGettingGalleryImage()
         inflateGalleryItems()
     }
 

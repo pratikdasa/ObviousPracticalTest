@@ -9,7 +9,7 @@ import com.obviouspracticaltest.models.GalleryModel
 @Dao
 interface GalleryDao {
 
-    @Query("SELECT * FROM NasaPhotos")
+    @Query("SELECT * FROM NasaPhotos ORDER BY date DESC")
     fun getGalleryList():List<GalleryModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

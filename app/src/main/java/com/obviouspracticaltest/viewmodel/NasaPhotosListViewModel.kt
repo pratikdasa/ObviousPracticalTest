@@ -35,8 +35,8 @@ class NasaPhotosListViewModel(activity: Activity) : ViewModel(), WsResponse {
         when (code) {
             StaticUtils.REQUEST_FOR_GALLARY -> {
                 val galleryModelList: List<GalleryModel> = response as List<GalleryModel>
-                this.galleryModelList.value = galleryModelList
-                SharedPreference(activity).saveCurrentDate(StaticUtils.getCurrentDate())
+//                this.galleryModelList.value = galleryModelList
+                 SharedPreference(activity).saveCurrentDate(StaticUtils.getCurrentDate())
                 Insert().execute(galleryModelList)
             }
         }
@@ -90,6 +90,11 @@ class NasaPhotosListViewModel(activity: Activity) : ViewModel(), WsResponse {
             GalleryRoomDatabase.getDatabase(activity).galleryDao().insert(params[0])
             return null
         }
+        override fun onPostExecute(result: Void?) {
+            super.onPostExecute(result)
+            SelectRecord().execute()
+        }
+
     }
 
 
