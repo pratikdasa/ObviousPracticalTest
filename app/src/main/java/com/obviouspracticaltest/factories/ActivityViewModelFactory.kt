@@ -4,7 +4,6 @@ import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.obviouspracticaltest.viewmodel.NasaPhotosListViewModel
-import com.obvioustest.ui.NasaPhotosListActivity
 
 
 class ActivityViewModelFactory(activity: Activity) : ViewModelProvider.Factory {
@@ -15,10 +14,6 @@ class ActivityViewModelFactory(activity: Activity) : ViewModelProvider.Factory {
       }
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (activity is NasaPhotosListActivity) {
-            return NasaPhotosListViewModel(activity) as T
-          }  else {
-            return NasaPhotosListViewModel(activity) as T
-        }
+        return NasaPhotosListViewModel(activity) as T
     }
 }
